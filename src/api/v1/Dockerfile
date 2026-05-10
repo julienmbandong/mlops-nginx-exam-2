@@ -9,13 +9,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copier le fichier requirements (remonte de deux crans par rapport au contexte de build)
-COPY requirements.txt .
+COPY src/api/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copier le script de l'API et le modèle ML
 # Note : Lors du build, nous nous assurerons que le fichier model.joblib est accessible
-COPY main.py .
-COPY model.joblib .
+COPY src/api/v1/main.py .
+COPY model/model.joblib .
 
 # Exposer le port interne
 EXPOSE 8000
