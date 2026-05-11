@@ -42,3 +42,8 @@ test-ab-debug:
 test-metrics:
 	@echo "Vérification des métriques Nginx..."
 	curl -k --user admin:admin https://localhost/metrics
+
+# Tests automatisés pour l'API de prédiction et les services associés
+test:
+	@echo "Lancement de la suite de tests automatisés..."
+	@bash ./tests/run_tests.sh

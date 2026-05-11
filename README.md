@@ -267,3 +267,23 @@ You must submit a `.zip` or `.tar.gz` archive containing your entire project, in
 Good luck! 🚀
 
 </details>
+
+
+---
+
+## 👨‍🎓 Notes de l'Étudiant / Student Submission Notes
+
+### Résumé des réalisations / Implementation Summary
+- **Infrastructure** : Déploiement complet via Docker Compose incluant Nginx (Reverse Proxy), API v1 (3 répliques avec Load Balancing), API v2 (A/B testing), Prometheus et Grafana.
+- **Sécurité** : 
+    - HTTPS activé avec redirection automatique du HTTP.
+    - Authentification Basic Auth (admin/admin) sur l'endpoint `/predict`.
+    - **Automatisation SSL** : Les certificats sont générés au build dans le conteneur Nginx et synchronisés sur l'hôte via un volume nommé pour garantir que les scripts de tests (`make test`) fonctionnent immédiatement.
+- **Gestion du trafic** : Configuration du Rate Limiting (10 req/s) et routage intelligent vers la V2 via le header `X-Experiment-Group`.
+
+### Guide Rapide pour la Correction / Quick Start for Reviewer
+Pour valider le projet, exécutez simplement les commandes suivantes dans l'ordre :
+
+1. **Démarrage** :
+   ```bash
+   make run-project
